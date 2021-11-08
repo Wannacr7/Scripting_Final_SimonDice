@@ -41,6 +41,12 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         On_Enable_Machine += StartEvent;
+
+        red.material.color = new Color(0.5f, 0.1f, 0.1f);
+        yellow.material.color= new Color(0.5f, 0.5f, 0.1f);
+        blue.material.color = new Color(0.1f,0.1f,0.5f);
+        green.material.color = new Color(0.1f, 0.5f, 0.1f);
+        purple.material.color = new Color(0.5f, 0.1f, 0.5f);
     }
 
     // Update is called once per frame
@@ -76,19 +82,19 @@ public class GameManager : MonoBehaviour
         switch (_typecolor)
         {
             case EColors.Red:
-                red.material.color = Color.LerpUnclamped(new Color(0.5f, 0.2f, 0.2f), new Color(1f, 0f, 0f), colorCurve.Evaluate(lerpRatio));
+                red.material.color = Color.LerpUnclamped(new Color(0.5f, 0.1f, 0.1f), new Color(1f, 0f, 0f), colorCurve.Evaluate(lerpRatio));
                 break;
             case EColors.Yellow:
-                yellow.material.color = Color.LerpUnclamped(new Color(0.5f, 0.2f, 0.2f), new Color(1f, 0f, 0f), colorCurve.Evaluate(lerpRatio));
+                yellow.material.color = Color.LerpUnclamped(new Color(0.5f, 0.5f, 0.1f), new Color(1f, 1f, 0f), colorCurve.Evaluate(lerpRatio));
                 break;
             case EColors.Blue:
-                blue.material.color = Color.LerpUnclamped(new Color(0.5f, 0.2f, 0.2f), new Color(1f, 0f, 0f), colorCurve.Evaluate(lerpRatio));
+                blue.material.color = Color.LerpUnclamped(new Color(0.1f, 0.1f, 0.5f), new Color(0f, .2f, 1f), colorCurve.Evaluate(lerpRatio));
                 break;
             case EColors.Green:
-                green.material.color = Color.LerpUnclamped(new Color(0.5f, 0.2f, 0.2f), new Color(1f, 0f, 0f), colorCurve.Evaluate(lerpRatio));
+                green.material.color = Color.LerpUnclamped(new Color(0.1f, 0.5f, 0.1f), new Color(0f, 1f, 0f), colorCurve.Evaluate(lerpRatio));
                 break;
             case EColors.Purple:
-                purple.material.color = Color.LerpUnclamped(new Color(0.5f, 0.2f, 0.2f), new Color(1f, 0f, 0f), colorCurve.Evaluate(lerpRatio));
+                purple.material.color = Color.LerpUnclamped(new Color(0.5f, 0.1f, 0.5f), new Color(1f, 0f, 1f), colorCurve.Evaluate(lerpRatio));
                 break;
             default:
                 break;
@@ -100,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     private void  StartEvent(bool _event)
     {
-        machineArray= SimonSayMachine.instance.GenerateArray(level + 1, 2);
+        machineArray= SimonSayMachine.instance.GenerateArray(level + 1, 5);
         startMachine = _event;
         
     }
