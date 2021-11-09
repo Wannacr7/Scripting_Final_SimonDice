@@ -18,7 +18,12 @@ public class GameManager : MonoBehaviour
     //Colores
     [SerializeField] private Renderer red, yellow, blue, green, purple;
     [SerializeField] AnimationCurve colorCurve;
-    
+    [SerializeField] GameObject TitleScreen;
+    [SerializeField] GameObject DifficultyScreen;
+    [SerializeField] GameObject StartButtom;
+    [SerializeField] GameObject Colores;
+
+
 
     public Action<bool> On_Enable_Machine;
     private bool startMachine = false;
@@ -117,6 +122,18 @@ public class GameManager : MonoBehaviour
             On_Enable_Machine(true);
         }
         startGame = true;
+    }
+
+    public void PressPlay()
+    {
+        TitleScreen.SetActive(false);
+        DifficultyScreen.SetActive(true);
+    }
+    public void HardMode()
+    {
+        DifficultyScreen.SetActive(false);
+        Colores.SetActive(true);
+        StartButtom.SetActive(true);
     }
 
 }
