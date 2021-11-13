@@ -20,6 +20,10 @@ public class IUController : MonoBehaviour
 
     [SerializeField] AudioSource menuMusic;
 
+    [SerializeField] GameObject backgroundNormal;
+    [SerializeField] GameObject backgroundMedium;
+    [SerializeField] GameObject backgroundHard;
+
 
     private bool IsPaused = false;
 
@@ -52,11 +56,16 @@ public class IUController : MonoBehaviour
     public void HardMode()
     {
         gameManager.difficulty = 5;
+        backgroundNormal.SetActive(false);
+        backgroundHard.SetActive(true);
+        
     }
     public void MediumMode()
     {
         gameManager.difficulty = 4;
         CoverLayer2.SetActive(true);
+        backgroundMedium.SetActive(true);
+        backgroundNormal.SetActive(false);
     }
     public void EasyMode()
     {
