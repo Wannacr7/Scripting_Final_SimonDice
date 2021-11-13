@@ -6,7 +6,7 @@ public class ColorsGestor : MonoBehaviour
 {
     public static ColorsGestor instance;
 
-    [SerializeField] private Renderer red, yellow, blue, green, purple;
+    [SerializeField] public Renderer red, yellow, blue, green, purple;
     [SerializeField] AnimationCurve colorCurve;
 
     private float timeChangeColor = 1f;
@@ -18,12 +18,8 @@ public class ColorsGestor : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(instance);
-        }
+
     }
 
     // Start is called before the first frame update

@@ -16,26 +16,29 @@ public enum EColors
 public class GameManager : MonoBehaviour
 {
     private EColors _typecolor;
-    //Colores
-    //[SerializeField] private Renderer red, yellow, blue, green, purple;
-    //[SerializeField] AnimationCurve colorCurve;
+
 
     public Action<bool> On_Enable_Machine;
     private bool startMachine = false;
-    private bool startGame = false;
+    [SerializeField]private bool startPlayer;
     private int[] machineArray;
 
     private float timeChangeColor = 1f;
     private float timer = 0;
     private float lerpRatio;
 
-    [SerializeField]private int level = 1;
+    [SerializeField] private int level = 0;
     [SerializeField]private int levelCounter=0;
     [SerializeField]public int difficulty = 0;
+
+    public int[] MachineArray { get => machineArray;}
+    public int Level { get => level; set => level = value; }
+    public bool StartPlayer { get => startPlayer; set => startPlayer = value; }
 
     void Start()
     {
         On_Enable_Machine += StartEvent;
+        startPlayer = false;
     }
 
     // Update is called once per frame
@@ -46,7 +49,10 @@ public class GameManager : MonoBehaviour
             SetMachineColor();
         }
     }
-
+    private void OnDisable()
+    {
+        On_Enable_Machine -= StartEvent;
+    }
     private void SetMachineColor()
     {
         timer += Time.deltaTime;
@@ -63,6 +69,7 @@ public class GameManager : MonoBehaviour
         lerpRatio = timer / timeChangeColor;
         _typecolor = (EColors)machineArray[levelCounter];
         ColorsGestor.instance.ChangeColor(_typecolor, lerpRatio);
+        startPlayer = true;
     }
 
     private void  StartEvent(bool _event)
