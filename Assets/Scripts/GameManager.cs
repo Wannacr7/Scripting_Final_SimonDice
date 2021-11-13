@@ -21,24 +21,27 @@ public class GameManager : MonoBehaviour
     public Action<bool> On_Enable_Machine;
     private bool startMachine = false;
     [SerializeField]private bool startPlayer;
-    private int[] machineArray;
+    [SerializeField]private int[] machineArray;
 
     private float timeChangeColor = 1f;
     private float timer = 0;
     private float lerpRatio;
 
     [SerializeField] private int level = 0;
-    [SerializeField]private int levelCounter=0;
+    [SerializeField]private int levelCounter;
     [SerializeField]public int difficulty = 0;
 
     public int[] MachineArray { get => machineArray;}
     public int Level { get => level; set => level = value; }
     public bool StartPlayer { get => startPlayer; set => startPlayer = value; }
+    public bool StartMachine { get => startMachine; }
 
     void Start()
     {
         On_Enable_Machine += StartEvent;
+        StartEvent(true);
         startPlayer = false;
+        levelCounter = 0;
     }
 
     // Update is called once per frame
@@ -49,10 +52,7 @@ public class GameManager : MonoBehaviour
             SetMachineColor();
         }
     }
-    private void OnDisable()
-    {
-        On_Enable_Machine -= StartEvent;
-    }
+
     private void SetMachineColor()
     {
         timer += Time.deltaTime;

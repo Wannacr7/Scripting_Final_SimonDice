@@ -16,7 +16,7 @@ public class SimonSayPlayer : MonoBehaviour
 
     //Verifica secuencia
     [SerializeField] private GameManager main;
-    private int sequenceLenght = 0;
+    [SerializeField]private int sequenceLenght;
     private bool verifyNumber = false;
 
 
@@ -27,7 +27,7 @@ public class SimonSayPlayer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        sequenceLenght = 0;
     }
 
     // Update is called once per frame
@@ -118,15 +118,17 @@ public class SimonSayPlayer : MonoBehaviour
     }
     private void CanContinue()
     {
+        int typeColor = (int)colorON;
+        
         Debug.Log((int)colorON + "  " + main.MachineArray[sequenceLenght]);
-        if (((int)colorON) == main.MachineArray[sequenceLenght])
+        if (typeColor == main.MachineArray[sequenceLenght])
         {
-            main.Level++;
             sequenceLenght++;
             verifyNumber = false;
             if (sequenceLenght == main.MachineArray.Length)
             {
-                Invoke("CallMachine", 1);
+                main.Level++;
+                Invoke("CallMachine", 2);
             }
         }
         else

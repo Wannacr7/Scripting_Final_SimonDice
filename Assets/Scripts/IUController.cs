@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.IO;
+using TMPro;
 
 public class IUController : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class IUController : MonoBehaviour
 
     [SerializeField] private GameObject StartButtom;
     [SerializeField] private GameObject pauseButtom;
+    [SerializeField] public TMP_Text[] stateOfGame;
 
     [SerializeField] private GameObject TitleScreen;
     [SerializeField] private GameObject DifficultyScreen;
@@ -24,12 +26,32 @@ public class IUController : MonoBehaviour
     [SerializeField] GameObject backgroundMedium;
     [SerializeField] GameObject backgroundHard;
 
+    [SerializeField] GameManager state;
 
     private bool IsPaused = false;
 
     private void Start()
     {
         menuMusic.Play();
+        
+
+    }
+    private void Update()
+    {
+        ChangeState();
+    }
+    private void ChangeState()
+    {
+        if (state.StartMachine)
+        {
+            stateOfGame[0].text = "Maquina";
+            stateOfGame[1].text = "Maquina";
+        }
+        else
+        {
+            stateOfGame[0].text = "Jugador";
+            stateOfGame[1].text = "Jugador";
+        }
     }
 
     public void testevent()
@@ -39,6 +61,8 @@ public class IUController : MonoBehaviour
             gameManager.On_Enable_Machine(true);
         }
         StartButtom.SetActive(false);
+        stateOfGame[0].gameObject.SetActive(true);
+
         pauseButtom.SetActive(true);
     }
 
