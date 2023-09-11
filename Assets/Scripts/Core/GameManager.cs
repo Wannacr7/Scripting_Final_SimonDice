@@ -21,6 +21,7 @@ namespace Core
 
 
         public Action<bool> On_Enable_Machine;
+        public static Action On_Enable_Player;
         private bool startMachine = false;
         [SerializeField] private bool startPlayer;
         [SerializeField] private List<int> machineArray;
@@ -36,48 +37,64 @@ namespace Core
         public List<int> MachineArray { get => machineArray; }
         public int Level { get => level; set => level = value; }
         public bool StartPlayer { get => startPlayer; set => startPlayer = value; }
-        public bool StartMachine { get => startMachine; }
+        public bool StartMachine { get => startMachine; set => startMachine = value; }
 
         void Start()
         {
-            On_Enable_Machine += StartEvent;
-            StartEvent(true);
-            startPlayer = false;
             levelCounter = 0;
         }
-
-        // Update is called once per frame
-        void Update()
+        private void OnEnable()
         {
-            if (startMachine == true)
-            {
-                SetMachineColor();
-            }
+            On_Enable_Machine += MachineStarted;
+            On_Enable_Player += PlayerStarted;
+            ColorsGestor.onFinishAnim += StatesManager;
         }
+        private void OnDisable()
+        {
+            On_Enable_Machine -= MachineStarted;
+            On_Enable_Player -= PlayerStarted;
+            ColorsGestor.onFinishAnim -= StatesManager;
+        }
+
 
         private void SetMachineColor()
         {
-            timer += Time.deltaTime;
-            if (timer >= timeChangeColor)
+            if (startMachine)
             {
-                timer = 0;
                 if (levelCounter < level) levelCounter++;
                 else
                 {
                     startMachine = false;
                     levelCounter = 0;
                 }
+
+                _typecolor = (EColors)machineArray[levelCounter];
+                Debug.Log("MACHINE: " + _typecolor);
+                ColorsGestor.instance.ChangeColor(_typecolor);
+                //startPlayer = true;
+
             }
-            lerpRatio = timer / timeChangeColor;
-            _typecolor = (EColors)machineArray[levelCounter];
-            ColorsGestor.instance.ChangeColor(_typecolor, lerpRatio);
-            startPlayer = true;
+
+
+        }
+        private void StatesManager()
+        {
+            if (StartMachine) MachineStarted(StartMachine);
+            else PlayerStarted();
+        }
+        private void PlayerStarted()
+        {
+            Debug.Log("Player started");
+            StartPlayer = true;
+            
         }
 
-        private void StartEvent(bool _event)
+        private void MachineStarted(bool _event)
         {
             machineArray = SimonSayMachine.instance.GenerateArray(level + 1, difficulty);
-            startMachine = _event;
+            StartMachine = _event;
+            StartPlayer = false;
+            SetMachineColor();
         }
 
 

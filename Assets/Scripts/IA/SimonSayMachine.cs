@@ -23,23 +23,6 @@ namespace IA
                 Destroy(instance);
             }
         }
-        // Start is called before the first frame update
-        void Start()
-        {
-            machineCount  = new List<int>();
-            //int[] test = GenerateArray(2,2);
-            //for (int i = 0; i < test.Length; i++)
-            //{
-            //    Debug.Log(test[i]);
-            //}
-
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
 
 
         private int GenerateColor(int maxExclusive)
@@ -56,10 +39,21 @@ namespace IA
         /// <returns></returns>
         public List<int> GenerateArray(int index, int difficulty)
         {
-            while(machineCount.Count < index)
+            if (machineCount == null)
             {
-                machineCount.Add(GenerateColor(difficulty));
+                machineCount = new List<int>
+                {
+                    GenerateColor(difficulty)
+                };
             }
+            else
+            {
+                while (machineCount.Count < index)
+                {
+                    machineCount.Add(GenerateColor(difficulty));
+                }
+            }
+
             return machineCount;
         }
     }

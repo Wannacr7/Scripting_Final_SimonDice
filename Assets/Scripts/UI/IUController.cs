@@ -9,9 +9,9 @@ namespace UI
 {
     public class IUController : MonoBehaviour
     {
-        [SerializeField] private GameObject Colores;
-        [SerializeField] private GameObject CoverLayer1;
-        [SerializeField] private GameObject CoverLayer2;
+        //[SerializeField] private GameObject Colores;
+        //[SerializeField] private GameObject CoverLayer1;
+        //[SerializeField] private GameObject CoverLayer2;
 
         [SerializeField] private GameManager gameManager;
 
@@ -22,24 +22,19 @@ namespace UI
 
         [SerializeField] private GameObject TitleScreen;
         [SerializeField] private GameObject DifficultyScreen;
-        [SerializeField] private GameObject PauseScreen;
+        //[SerializeField] private GameObject PauseScreen;
 
-        [SerializeField] AudioSource menuMusic;
+        //[SerializeField] AudioSource menuMusic;
 
-        [SerializeField] GameObject backgroundNormal;
-        [SerializeField] GameObject backgroundMedium;
-        [SerializeField] GameObject backgroundHard;
+        //[SerializeField] GameObject backgroundNormal;
+        //[SerializeField] GameObject backgroundMedium;
+        //[SerializeField] GameObject backgroundHard;
 
         [SerializeField] GameManager state;
 
         private bool IsPaused = false;
 
-        private void Start()
-        {
-            menuMusic.Play();
 
-
-        }
         private void Update()
         {
             ChangeState();
@@ -63,10 +58,7 @@ namespace UI
 
         public void testevent()
         {
-            if (gameManager.On_Enable_Machine != null)
-            {
-                gameManager.On_Enable_Machine(true);
-            }
+            gameManager.On_Enable_Machine?.Invoke(true);
             StartButtom.SetActive(false);
             stateOfGame[0].gameObject.SetActive(true);
             score.gameObject.SetActive(true);
@@ -81,28 +73,19 @@ namespace UI
         public void ChooseDifficulty()
         {
             DifficultyScreen.SetActive(false);
-            Colores.SetActive(true);
             StartButtom.SetActive(true);
         }
         public void HardMode()
         {
             gameManager.difficulty = 5;
-            backgroundNormal.SetActive(false);
-            backgroundHard.SetActive(true);
-
         }
         public void MediumMode()
         {
             gameManager.difficulty = 4;
-            CoverLayer2.SetActive(true);
-            backgroundMedium.SetActive(true);
-            backgroundNormal.SetActive(false);
         }
         public void EasyMode()
         {
             gameManager.difficulty = 2;
-            CoverLayer1.SetActive(true);
-
         }
         public void ExitGame()
         {
