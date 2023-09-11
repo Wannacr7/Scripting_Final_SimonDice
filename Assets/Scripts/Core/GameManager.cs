@@ -2,6 +2,7 @@ using IA;
 using UI;
 using UnityEngine;
 using System;
+using System.Collections.Generic;
 
 namespace Core
 {
@@ -22,7 +23,7 @@ namespace Core
         public Action<bool> On_Enable_Machine;
         private bool startMachine = false;
         [SerializeField] private bool startPlayer;
-        [SerializeField] private int[] machineArray;
+        [SerializeField] private List<int> machineArray;
 
         private float timeChangeColor = 1f;
         private float timer = 0;
@@ -32,7 +33,7 @@ namespace Core
         [SerializeField] private int levelCounter;
         [SerializeField] public int difficulty = 0;
 
-        public int[] MachineArray { get => machineArray; }
+        public List<int> MachineArray { get => machineArray; }
         public int Level { get => level; set => level = value; }
         public bool StartPlayer { get => startPlayer; set => startPlayer = value; }
         public bool StartMachine { get => startMachine; }

@@ -51,7 +51,7 @@ namespace UI
 
                 stateOfGame[0].text = "Maquina";
                 stateOfGame[1].text = "Maquina";
-                score.text = "0" + (state.MachineArray.Length - 1).ToString();
+                score.text = "0" + (state.MachineArray.Count - 1).ToString();
             }
             else
             {

@@ -10,6 +10,7 @@ namespace UI
         public static ColorsGestor instance;
 
         [SerializeField] public Renderer red, yellow, blue, green, purple;
+        [SerializeField] public Material red1, yellow1, blue1, green1, purple1;
         [SerializeField] AnimationCurve colorCurve;
 
         private float timeChangeColor = 1f;
@@ -28,6 +29,8 @@ namespace UI
         // Start is called before the first frame update
         void Start()
         {
+            green1.EnableKeyword("_EMISSION");
+
             SetAsDefault(EColors.Null);
         }
         public void ChangeColor(EColors _typecolor, float _learpRatio)
@@ -35,23 +38,28 @@ namespace UI
             switch (_typecolor)
             {
                 case EColors.Red:
-                    red.material.color = Color.LerpUnclamped(new Color(0.5f, 0.1f, 0.1f), new Color(1f, 0f, 0f), colorCurve.Evaluate(_learpRatio));
+                    red1.SetColor("_EmissionColor", red1.color);
+                    red1.SetFloat("_EmissionScaleUI", 1.0f);
                     SetAsDefault(EColors.Red);
                     break;
                 case EColors.Yellow:
-                    yellow.material.color = Color.LerpUnclamped(new Color(0.5f, 0.5f, 0.1f), new Color(1f, 1f, 0f), colorCurve.Evaluate(_learpRatio));
+                    yellow1.SetColor("_EmissionColor", yellow1.color);
+                    yellow1.SetFloat("_EmissionScaleUI", 1.0f);
                     SetAsDefault(EColors.Yellow);
                     break;
                 case EColors.Blue:
-                    blue.material.color = Color.LerpUnclamped(new Color(0.1f, 0.1f, 0.5f), new Color(0f, .2f, 1f), colorCurve.Evaluate(_learpRatio));
+                    blue1.SetColor("_EmissionColor", blue1.color);
+                    blue1.SetFloat("_EmissionScaleUI", 1.0f);
                     SetAsDefault(EColors.Blue);
                     break;
                 case EColors.Green:
-                    green.material.color = Color.LerpUnclamped(new Color(0.1f, 0.5f, 0.1f), new Color(0f, 1f, 0f), colorCurve.Evaluate(_learpRatio));
+                    green1.SetColor("_EmissionColor", green1.color);
+                    green1.SetFloat("_EmissionScaleUI", 1.0f);
                     SetAsDefault(EColors.Green);
                     break;
                 case EColors.Purple:
-                    purple.material.color = Color.LerpUnclamped(new Color(0.5f, 0.1f, 0.5f), new Color(1f, 0f, 1f), colorCurve.Evaluate(_learpRatio));
+                    purple1.SetColor("_EmissionColor", purple1.color);
+                    purple1.SetFloat("_EmissionScaleUI", 1.0f);
                     SetAsDefault(EColors.Purple);
                     break;
                 default:
@@ -63,41 +71,24 @@ namespace UI
             switch (_NoChange)
             {
                 case EColors.Red:
-                    yellow.material.color = new Color(0.5f, 0.5f, 0.1f);
-                    blue.material.color = new Color(0.1f, 0.1f, 0.5f);
-                    green.material.color = new Color(0.1f, 0.5f, 0.1f);
-                    purple.material.color = new Color(0.5f, 0.1f, 0.5f);
+                    red1.SetColor("_EmissionColor", Color.black);
+                    red1.SetFloat("_EmissionScaleUI", 0.0f);
                     break;
                 case EColors.Yellow:
-                    red.material.color = new Color(0.5f, 0.1f, 0.1f);
-                    blue.material.color = new Color(0.1f, 0.1f, 0.5f);
-                    green.material.color = new Color(0.1f, 0.5f, 0.1f);
-                    purple.material.color = new Color(0.5f, 0.1f, 0.5f);
+                    yellow1.SetColor("_EmissionColor", Color.black);
+                    yellow1.SetFloat("_EmissionScaleUI", 0.0f);
                     break;
                 case EColors.Blue:
-                    red.material.color = new Color(0.5f, 0.1f, 0.1f);
-                    yellow.material.color = new Color(0.5f, 0.5f, 0.1f);
-                    green.material.color = new Color(0.1f, 0.5f, 0.1f);
-                    purple.material.color = new Color(0.5f, 0.1f, 0.5f);
+                    blue1.SetColor("_EmissionColor", Color.black);
+                    blue1.SetFloat("_EmissionScaleUI", 0.0f);
                     break;
                 case EColors.Green:
-                    red.material.color = new Color(0.5f, 0.1f, 0.1f);
-                    yellow.material.color = new Color(0.5f, 0.5f, 0.1f);
-                    blue.material.color = new Color(0.1f, 0.1f, 0.5f);
-                    purple.material.color = new Color(0.5f, 0.1f, 0.5f);
+                    green1.SetColor("_EmissionColor", Color.black);
+                    green1.SetFloat("_EmissionScaleUI", 0.0f);
                     break;
                 case EColors.Purple:
-                    red.material.color = new Color(0.5f, 0.1f, 0.1f);
-                    yellow.material.color = new Color(0.5f, 0.5f, 0.1f);
-                    blue.material.color = new Color(0.1f, 0.1f, 0.5f);
-                    green.material.color = new Color(0.1f, 0.5f, 0.1f);
-                    break;
-                case EColors.Null:
-                    red.material.color = new Color(0.5f, 0.1f, 0.1f);
-                    yellow.material.color = new Color(0.5f, 0.5f, 0.1f);
-                    blue.material.color = new Color(0.1f, 0.1f, 0.5f);
-                    green.material.color = new Color(0.1f, 0.5f, 0.1f);
-                    purple.material.color = new Color(0.5f, 0.1f, 0.5f);
+                    purple1.SetColor("_EmissionColor", Color.black);
+                    purple1.SetFloat("_EmissionScaleUI", 0.0f);
                     break;
                 default:
                     break;

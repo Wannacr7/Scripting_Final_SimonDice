@@ -8,6 +8,7 @@ namespace IA
     {
 
         public static SimonSayMachine instance;
+        private List<int> machineCount;
 
 
         private void Awake()
@@ -25,6 +26,7 @@ namespace IA
         // Start is called before the first frame update
         void Start()
         {
+            machineCount  = new List<int>();
             //int[] test = GenerateArray(2,2);
             //for (int i = 0; i < test.Length; i++)
             //{
@@ -52,14 +54,13 @@ namespace IA
         /// <param name="index"> Representa el numero de veces que se repite la secuencia</param>
         /// <param name="difficulty"> Toma en cuenta los modos de dificultad del juego</param>
         /// <returns></returns>
-        public int[] GenerateArray(int index, int difficulty)
+        public List<int> GenerateArray(int index, int difficulty)
         {
-            int[] fill = new int[index];
-            for (int i = 0; i < fill.Length; i++)
+            while(machineCount.Count < index)
             {
-                fill[i] = GenerateColor(difficulty);
+                machineCount.Add(GenerateColor(difficulty));
             }
-            return fill;
+            return machineCount;
         }
     }
 

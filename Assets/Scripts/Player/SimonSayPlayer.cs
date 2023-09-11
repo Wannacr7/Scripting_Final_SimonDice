@@ -127,7 +127,7 @@ namespace Player
             {
                 sequenceLenght++;
                 verifyNumber = false;
-                if (sequenceLenght == main.MachineArray.Length)
+                if (sequenceLenght == main.MachineArray.Count)
                 {
                     main.Level++;
                     Invoke("CallMachine", 2);
