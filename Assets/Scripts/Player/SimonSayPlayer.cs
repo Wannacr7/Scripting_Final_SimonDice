@@ -105,7 +105,7 @@ namespace Player
         private void CallMachine()
         {
             sequenceLenght = 0;
-            main.On_Enable_Machine?.Invoke(true);
+            main.StartMachine = true;
         }
     }
 }

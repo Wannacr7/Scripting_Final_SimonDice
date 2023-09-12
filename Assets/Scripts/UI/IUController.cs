@@ -58,7 +58,7 @@ namespace UI
 
         public void testevent()
         {
-            gameManager.On_Enable_Machine?.Invoke(true);
+            gameManager.On_Enable_Machine?.Invoke();
             StartButtom.SetActive(false);
             stateOfGame[0].gameObject.SetActive(true);
             score.gameObject.SetActive(true);

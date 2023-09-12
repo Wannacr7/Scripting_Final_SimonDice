@@ -3,6 +3,7 @@ using UI;
 using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Core
 {
@@ -20,18 +21,16 @@ namespace Core
         private EColors _typecolor;
 
 
-        public Action<bool> On_Enable_Machine;
+        public Action On_Enable_Machine;
         public static Action On_Enable_Player;
         private bool startMachine = false;
         [SerializeField] private bool startPlayer;
         [SerializeField] private List<int> machineArray;
 
-        private float timeChangeColor = 1f;
-        private float timer = 0;
-        private float lerpRatio;
+
 
         [SerializeField] private int level = 0;
-        [SerializeField] private int levelCounter;
+
         [SerializeField] public int difficulty = 0;
 
         public List<int> MachineArray { get => machineArray; }
@@ -39,10 +38,12 @@ namespace Core
         public bool StartPlayer { get => startPlayer; set => startPlayer = value; }
         public bool StartMachine { get => startMachine; set => startMachine = value; }
 
-        void Start()
+        private void Start()
         {
-            levelCounter = 0;
+            StartMachine = true;
+            StartPlayer = false;
         }
+
         private void OnEnable()
         {
             On_Enable_Machine += MachineStarted;
@@ -57,44 +58,44 @@ namespace Core
         }
 
 
-        private void SetMachineColor()
+        private IEnumerator SetMachineColor()
         {
             if (startMachine)
             {
-                if (levelCounter < level) levelCounter++;
-                else
+                for (int i = 0; i < machineArray.Count-1; i++)
                 {
-                    startMachine = false;
-                    levelCounter = 0;
+                    yield return new WaitForSeconds(2);
+                    _typecolor = (EColors)machineArray[i];
+                    Debug.Log("MACHINE: " + _typecolor);
+                    ColorsGestor.instance.ChangeColor(_typecolor);
+                    //startPlayer = true;
+                    
                 }
-
-                _typecolor = (EColors)machineArray[levelCounter];
-                Debug.Log("MACHINE: " + _typecolor);
-                ColorsGestor.instance.ChangeColor(_typecolor);
-                //startPlayer = true;
+                startMachine = false;
 
             }
 
-
+            yield return null;
         }
         private void StatesManager()
         {
-            if (StartMachine) MachineStarted(StartMachine);
+            if (!StartMachine) MachineStarted();
             else PlayerStarted();
         }
         private void PlayerStarted()
         {
             Debug.Log("Player started");
             StartPlayer = true;
-            
+
         }
 
-        private void MachineStarted(bool _event)
+        private void MachineStarted()
         {
             machineArray = SimonSayMachine.instance.GenerateArray(level + 1, difficulty);
-            StartMachine = _event;
-            StartPlayer = false;
-            SetMachineColor();
+
+            StartCoroutine(SetMachineColor());
+            StartMachine = false;
+            StartPlayer = true;
         }
 
 
