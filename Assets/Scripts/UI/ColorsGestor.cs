@@ -14,13 +14,18 @@ namespace UI
         [SerializeField] public Material red1, yellow1, blue1, green1, purple1;
         [SerializeField] AnimationCurve colorCurve;
 
-        private float time = 2.0f;
+        private float time = 0.5f;
 
         private void Awake()
         {
             if (instance == null)
             {
                 instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
+            else
+            {
+                Destroy(instance);
             }
 
         }

@@ -46,13 +46,13 @@ namespace Core
 
         private void OnEnable()
         {
-            On_Enable_Machine += MachineStarted;
+            //On_Enable_Machine += MachineStarted;
             On_Enable_Player += PlayerStarted;
             ColorsGestor.onFinishAnim += StatesManager;
         }
         private void OnDisable()
         {
-            On_Enable_Machine -= MachineStarted;
+            //On_Enable_Machine -= MachineStarted;
             On_Enable_Player -= PlayerStarted;
             ColorsGestor.onFinishAnim -= StatesManager;
         }
@@ -79,8 +79,8 @@ namespace Core
         }
         private void StatesManager()
         {
-            if (!StartMachine) MachineStarted();
-            else PlayerStarted();
+            //if (!StartMachine) MachineStarted();
+            //else PlayerStarted();
         }
         private void PlayerStarted()
         {
@@ -89,14 +89,14 @@ namespace Core
 
         }
 
-        private void MachineStarted()
+        /*private void MachineStarted()
         {
             machineArray = SimonSayMachine.instance.GenerateArray(level + 1, difficulty);
 
             StartCoroutine(SetMachineColor());
             StartMachine = false;
             StartPlayer = true;
-        }
+        }*/
 
 
     }
