@@ -12,9 +12,9 @@ namespace IA
 
         private void Start()
         {
-            machineCount = new List<int>();
-            machineCount.Add(GenerateColor(4));
-            StartCoroutine(ShowColor(10, 4));
+            //machineCount = new List<int>();
+            //machineCount.Add(GenerateColor(4));
+            //StartCoroutine(ShowColor(10, 4));
         }
 
         public IEnumerator ShowColor(int _index, int _difficulty)
@@ -44,12 +44,12 @@ namespace IA
         /// <summary>
         /// Genera el array que contruira la secuencia del juego
         /// </summary>
-        /// <param name="index"> Representa el numero de veces que se repite la secuencia</param>
+        /// <param name="index"> Cuantos pasos lleva la secuencia</param>
         /// <param name="difficulty"> Toma en cuenta los modos de dificultad del juego</param>
         /// <returns></returns>
-        private List<int> GenerateArray(int _index, int _difficulty)
+        private List<int> GenerateArray(int _level, int _difficulty)
         {
-            while (machineCount.Count < _index)
+            while (machineCount.Count < _level)
             {
                 machineCount.Add(GenerateColor(_difficulty));
             }

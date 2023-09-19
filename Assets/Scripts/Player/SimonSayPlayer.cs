@@ -8,11 +8,10 @@ namespace Player
     public class SimonSayPlayer : MonoBehaviour
     {
 
-        //Verifica secuencia
-        [SerializeField] private GameManager main;
+
         [SerializeField] private int sequenceLenght;
 
-        private bool playerCanPress = false;
+        private bool playerCanPress = true;
 
 
         private EColors colorON;
@@ -28,9 +27,9 @@ namespace Player
 
         private void Update()
         {
-            if (main.StartPlayer)
+            if (playerCanPress)
             {
-                GetPlayerNum(main.StartPlayer);
+                GetPlayerNum(playerCanPress);
 
             }
         }
@@ -44,35 +43,39 @@ namespace Player
             {
                 if (Input.GetKeyDown((KeyCode.Q)))
                 {
+                    Debug.Log("Q");
                     ColorsGestor.instance.ChangeColor(EColors.Yellow);
-                    Debug.Log("");
                     CanContinue();
-                    playerCanPress=false;
+                    //playerCanPress=false;
 
                 }
                 if (Input.GetKeyDown((KeyCode.W)))
                 {
+                    Debug.Log("W");
                     ColorsGestor.instance.ChangeColor(EColors.Red);
                     CanContinue();
-                    playerCanPress =false;   
+                    //playerCanPress =false;   
                 }
                 if (Input.GetKeyDown((KeyCode.A)))
                 {
+                    Debug.Log("A");
                     ColorsGestor.instance.ChangeColor(EColors.Green);
                     CanContinue();
-                    playerCanPress=false;
+                    //playerCanPress=false;
                 }
                 if (Input.GetKeyDown((KeyCode.S)))
                 {
-                    colorON = EColors.Blue;
+                    Debug.Log("S");
+                    ColorsGestor.instance.ChangeColor(EColors.Blue);
                     CanContinue();
-                    playerCanPress=false;
+                    //playerCanPress=false;
                 }
                 if (Input.GetKeyDown((KeyCode.D)))
                 {
+                    Debug.Log("D");
                     ColorsGestor.instance.ChangeColor(EColors.Purple);
                     CanContinue();
-                    playerCanPress=false;
+                   // playerCanPress=false;
                 }
             }
 
