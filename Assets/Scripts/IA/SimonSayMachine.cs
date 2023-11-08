@@ -23,6 +23,9 @@ namespace IA
 
 
             }
+            yield return new WaitForSeconds(1);
+            Debug.Log("Player turn");
+            GameManager.On_Enable_Player?.Invoke(temp);
         }
 
         /// <summary>

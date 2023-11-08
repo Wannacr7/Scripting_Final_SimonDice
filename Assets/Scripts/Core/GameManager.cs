@@ -20,7 +20,7 @@ namespace Core
     public class GameManager : MonoBehaviour
     {
         public static Action On_Enable_Machine;
-        public static Action On_Enable_Player;
+        public static Action<List<int>> On_Enable_Player;
         public static Action<int> On_Set_Difficult;
 
 
@@ -47,11 +47,13 @@ namespace Core
         private void OnEnable()
         {
             On_Enable_Machine += StartMachine;
+            On_Enable_Player += StartPlayer;
             On_Set_Difficult += SetDifficult;
         }
         private void OnDisable()
         {
             On_Enable_Machine -= StartMachine;
+            On_Enable_Player -= StartPlayer;
             On_Set_Difficult -= SetDifficult;
         }
 
@@ -60,9 +62,9 @@ namespace Core
             StartCoroutine(machine.ShowColor(level, difficulty));
             level++;
         }
-        private void StartPlayer()
+        private void StartPlayer(List<int> _mArray)
         {
-
+            player.SetPlayerTurn(_mArray);
         }
         private void SetDifficult(int _difficult)
         {

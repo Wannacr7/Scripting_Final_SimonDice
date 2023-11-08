@@ -18,16 +18,8 @@ namespace UI
 
         private void Awake()
         {
-            if (instance == null)
-            {
-                instance = this;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(instance);
-            }
-
+            if (instance != null && instance != this) Destroy(gameObject); 
+            else instance = this;
         }
 
         // Start is called before the first frame update
@@ -74,6 +66,7 @@ namespace UI
                 default:
                     break;
             }
+
         }
         private IEnumerator SetAsDefault(EColors _NoChange, float _time)
         {
@@ -86,25 +79,26 @@ namespace UI
                     break;
                 case EColors.Yellow:
                     yellow1.SetColor("_EmissionColor", Color.black);
-                    
+
                     break;
                 case EColors.Blue:
                     blue1.SetColor("_EmissionColor", Color.black);
-                    
+
                     break;
                 case EColors.Green:
                     green1.SetColor("_EmissionColor", Color.black);
-                    
+
                     break;
                 case EColors.Purple:
                     purple1.SetColor("_EmissionColor", Color.black);
-                    
+
                     break;
 
                 default:
                     break;
             }
             onFinishAnim?.Invoke();
+
         }
         private void Cleaner()
         {
