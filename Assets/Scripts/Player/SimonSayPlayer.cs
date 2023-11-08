@@ -87,7 +87,7 @@ namespace Player
         {
             int typeColor = (int)colorON;
 
-            Debug.Log((int)colorON + "  " + main.MachineArray[sequenceLenght]);
+            /*Debug.Log((int)colorON + "  " + main.MachineArray[sequenceLenght]);
             if (typeColor == main.MachineArray[sequenceLenght])
             {
                 sequenceLenght++;
@@ -102,13 +102,13 @@ namespace Player
             else
             {
                 SceneManager.LoadScene("3DTest");
-            }
+            }*/
         }
 
         private void CallMachine()
         {
             sequenceLenght = 0;
-            main.StartMachine = true;
+            //main.StartMachine = true;
         }
     }
 }

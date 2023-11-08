@@ -10,12 +10,7 @@ namespace IA
     {
         private List<int> machineCount;
 
-        private void Start()
-        {
-            //machineCount = new List<int>();
-            //machineCount.Add(GenerateColor(4));
-            //StartCoroutine(ShowColor(10, 4));
-        }
+
 
         public IEnumerator ShowColor(int _index, int _difficulty)
         {
@@ -49,6 +44,13 @@ namespace IA
         /// <returns></returns>
         private List<int> GenerateArray(int _level, int _difficulty)
         {
+            if(_level == 1)
+            {
+                machineCount = new List<int>
+                {
+                    GenerateColor(_difficulty)
+                };
+            }
             while (machineCount.Count < _level)
             {
                 machineCount.Add(GenerateColor(_difficulty));

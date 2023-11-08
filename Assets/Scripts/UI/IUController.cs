@@ -13,11 +13,11 @@ namespace UI
         //[SerializeField] private GameObject CoverLayer1;
         //[SerializeField] private GameObject CoverLayer2;
 
-        [SerializeField] private GameManager gameManager;
+        
 
         [SerializeField] private GameObject StartButtom;
         [SerializeField] private GameObject pauseButtom;
-        [SerializeField] public TMP_Text[] stateOfGame;
+        [SerializeField] public TMP_Text stateOfGame;
         [SerializeField] public TMP_Text score;
 
         [SerializeField] private GameObject TitleScreen;
@@ -35,34 +35,15 @@ namespace UI
         private bool IsPaused = false;
 
 
-        private void Update()
-        {
-            ChangeState();
-        }
-        private void ChangeState()
-        {
-            if (state.StartMachine)
-            {
 
-                stateOfGame[0].text = "Maquina";
-                stateOfGame[1].text = "Maquina";
-                score.text = "0" + (state.MachineArray.Count - 1).ToString();
-            }
-            else
-            {
-                stateOfGame[0].text = "Jugador";
-                stateOfGame[1].text = "Jugador";
 
-            }
-        }
-
-        public void testevent()
+        public void StartGame()
         {
-            gameManager.On_Enable_Machine?.Invoke();
             StartButtom.SetActive(false);
-            stateOfGame[0].gameObject.SetActive(true);
+            stateOfGame.gameObject.SetActive(true);
             score.gameObject.SetActive(true);
             pauseButtom.SetActive(true);
+            GameManager.On_Enable_Machine?.Invoke();
         }
 
         public void PressPlay()
@@ -77,15 +58,16 @@ namespace UI
         }
         public void HardMode()
         {
-            gameManager.difficulty = 5;
+            GameManager.On_Set_Difficult?.Invoke(5);
+
         }
         public void MediumMode()
         {
-            gameManager.difficulty = 4;
+            GameManager.On_Set_Difficult?.Invoke(4);
         }
         public void EasyMode()
         {
-            gameManager.difficulty = 2;
+            GameManager.On_Set_Difficult?.Invoke(2);
         }
         public void ExitGame()
         {
